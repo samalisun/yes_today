@@ -12,13 +12,15 @@ class TodosProvider with ChangeNotifier {
   UnmodifiableListView<Todo> get todos => UnmodifiableListView(_todos);
 
   void addTodo(String title) {
-    _todos.add(Todo(title: title));
+    _todos.add(Todo(
+      title: title,
+      id: DateTime.now().microsecondsSinceEpoch,
+    ));
     notifyListeners();
   }
 
   void toggleTodoStatus(Todo todo) {
-    final todoIndex = _todos.indexOf(todo);
-    _todos[todoIndex].toggleCompleted();
+    _todos.firstWhere((t) => t.id == todo.id).toggleCompleted();
     notifyListeners();
   }
 
