@@ -25,7 +25,7 @@ class _TodayScreenState extends State<TodayScreen> {
   }
 
   void _submit() {
-    Provider.of<TodosProvider>(context, listen: false).addTodo(newTaskTitle);
+    Provider.of<TasksProvider>(context, listen: false).addTask(newTaskTitle);
     Navigator.pop(context, 'Add');
     _textFieldController.clear();
   }
@@ -91,13 +91,13 @@ class _TodayScreenState extends State<TodayScreen> {
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(Icons.explore),
-            icon: Icon(Icons.explore_outlined),
+            selectedIcon: Icon(Icons.check_box),
+            icon: Icon(Icons.check_box_outlined),
             label: 'Home',
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.check_box),
-            icon: Icon(Icons.check_box_outlined),
+            selectedIcon: Icon(Icons.today),
+            icon: Icon(Icons.today_outlined),
             label: 'Today',
           ),
           NavigationDestination(
@@ -110,7 +110,7 @@ class _TodayScreenState extends State<TodayScreen> {
       floatingActionButton: FloatingActionButton(
           onPressed: () => _displayDialog(context),
           tooltip: 'Add Item',
-          child: const Icon(Icons.add)),
+          child: const Icon(Icons.edit)),
     );
   }
 }

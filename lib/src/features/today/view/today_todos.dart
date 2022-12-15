@@ -13,30 +13,16 @@ class TodayTodos extends StatefulWidget {
 }
 
 class _TodayTodosState extends State<TodayTodos> {
-
   @override
   Widget build(BuildContext context) {
-    final todos = Provider.of<TodosProvider>(context);
-    final openTodos = todos.openTodos;
-    final completedTodos = todos.completedTodos;
+    final tasks = Provider.of<TasksProvider>(context);
+    final tasksOfToday = tasks.tasksOfToday;
 
     return ListView(
-      padding: const EdgeInsets.all(16),
       children: [
-        const Padding(
-          padding: EdgeInsets.all(16),
-          child: Text('Todo', style: TextStyle(fontSize: 18)),
-        ),
-        ...openTodos.map<Widget>((Todo todo) {
-          return TodoItem(todo: todo);
+        ...tasksOfToday.map<Widget>((Task todo) {
+          return TodoItem(task: todo);
         }).toList(),
-        const Padding(
-          padding: EdgeInsets.all(16),
-          child: Text('Completed', style: TextStyle(fontSize: 18)),
-        ),
-        ...completedTodos.map<Widget>((Todo todo) {
-          return TodoItem(todo: todo);
-        }).toList()
       ],
     );
   }
