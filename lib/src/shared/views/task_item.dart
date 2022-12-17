@@ -31,13 +31,13 @@ class TodoItem extends StatelessWidget {
           icon: task.completed
               ? const Icon(Icons.check)
               : const Icon(Icons.radio_button_unchecked),
-          color: task.important ? colors.primary : colors.onBackground,
+          color: (task.important && !task.completed) ? colors.primary : colors.onBackground,
           tooltip: 'Toggle task status',
           onPressed: () {
             todos.toggleTaskStatus(task);
           },
         ),
-        title: Text(task.title, style: TextStyle(height: 1.5, color: colors.onBackground)),
+        title: Text(task.title, style: TextStyle(fontSize: 16, height: 1.5, color: colors.onBackground)),
       ),
     );
   }

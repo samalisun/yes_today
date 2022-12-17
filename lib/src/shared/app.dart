@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final settings = ValueNotifier(ThemeSettings(
-    sourceColor: Colors.lightBlue,
+    sourceColor: const Color.fromRGBO(0, 69, 142, 1),
     themeMode: ThemeMode.dark,
   ));
 
