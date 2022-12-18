@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../shared/providers/providers.dart';
-import '../../today/today.dart';
-import '../home.dart';
+import 'providers/providers.dart';
+import '../features/home/home.dart';
+import '../features/today/today.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class TodayScreen extends StatefulWidget {
+  const TodayScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<TodayScreen> createState() => _TodayScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  int currentPageIndex = 0;
+class _TodayScreenState extends State<TodayScreen> {
   final TextEditingController _textFieldController = TextEditingController();
+  final List<String> titleList = ['Home', 'Today', 'Review'];
+
   String newTaskTitle = '';
   bool newTaskCompleted = false;
+
+  double? scrolledUnderElevation;
+  bool shadowColor = false;
+
+  int currentPageIndex = 0;
+  String title = 'Home';
 
   @override
   void initState() {
@@ -72,7 +79,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Home'),
+        scrolledUnderElevation: scrolledUnderElevation,
+        shadowColor: shadowColor ? Theme.of(context).colorScheme.shadow : null,
+        title: Text(title),
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {},
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.account_circle_outlined),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: <Widget>[
         const HomeTasks(),
@@ -86,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
+            title = titleList[index];
           });
         },
         selectedIndex: currentPageIndex,

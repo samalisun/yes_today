@@ -1,2 +1,2 @@
-export './today_screen.dart';
+export '../../../shared/home.dart';
 export './today_tasks.dart';
