@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../classes/classes.dart';
 
@@ -75,12 +75,32 @@ class TasksProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  getTaskOfTodaySorted(List<Task> tasks) {
+  getTasksSortedByStatus(List<Task> tasks) {
     List<Task> completedTasks =
         tasks.where((task) => task.completed == true).toList();
     List<Task> openTasks =
         tasks.where((task) => task.completed == false).toList();
     return [...completedTasks, ...openTasks];
+  }
+
+  getTaskByDate(DateTime date) {
+    return _tasks
+        .where((task) => DateUtils.isSameDay(task.dueDate, date))
+        .toList();
+  }
+
+  List<DateTime> get datesWithTasks {
+    List<DateTime> dateList = [];
+
+    for (var task in _tasks) {
+      if (dateList
+          .where((date) => DateUtils.isSameDay(date, task.dueDate))
+          .isEmpty) {
+        dateList.add(task.dueDate);
+      }
+    }
+
+    return dateList;
   }
 
   List<Task> get completedTasks =>
@@ -90,9 +110,6 @@ class TasksProvider with ChangeNotifier {
       _tasks.where((task) => task.completed == false).toList();
 
   List<Task> get tasksOfToday => _tasks
-      .where((task) =>
-          task.dueDate.year == DateTime.now().year &&
-          task.dueDate.month == DateTime.now().month &&
-          task.dueDate.day == DateTime.now().day)
+      .where((task) => DateUtils.isSameDay(task.dueDate, DateTime.now()))
       .toList();
 }

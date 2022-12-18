@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../shared/providers/providers.dart';
-import '../../home/home.dart';
-import '../today.dart';
+import '../../today/today.dart';
+import '../home.dart';
 
-class TodayScreen extends StatefulWidget {
-  const TodayScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<TodayScreen> createState() => _TodayScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _TodayScreenState extends State<TodayScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   int currentPageIndex = 0;
   final TextEditingController _textFieldController = TextEditingController();
   String newTaskTitle = '';
@@ -71,8 +71,8 @@ class _TodayScreenState extends State<TodayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
-        title: const Text('Today'),
+        centerTitle: true,
+        title: const Text('Home'),
       ),
       body: <Widget>[
         const HomeTasks(),

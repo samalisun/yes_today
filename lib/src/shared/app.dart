@@ -2,7 +2,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../features/today/view/today_screen.dart';
+import '../features/today/today.dart';
 import 'providers/providers.dart';
 
 class MyApp extends StatefulWidget {

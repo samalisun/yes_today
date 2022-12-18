@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import '../classes/classes.dart';
 import '../providers/providers.dart';
 
-class TodoItem extends StatelessWidget {
-  TodoItem({
+class TaskItem extends StatelessWidget {
+  TaskItem({
     required this.task,
   }) : super(key: ObjectKey(task));
 

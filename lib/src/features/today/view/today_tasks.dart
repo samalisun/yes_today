@@ -6,14 +6,14 @@ import 'package:yes_today/src/shared/providers/providers.dart';
 import '../../../shared/classes/classes.dart';
 import '../../../shared/views/views.dart';
 
-class TodayTodos extends StatefulWidget {
-  const TodayTodos({Key? key}) : super(key: key);
+class TodayTasks extends StatefulWidget {
+  const TodayTasks({Key? key}) : super(key: key);
 
   @override
-  State<TodayTodos> createState() => _TodayTodosState();
+  State<TodayTasks> createState() => _TodayTasksState();
 }
 
-class _TodayTodosState extends State<TodayTodos> {
+class _TodayTasksState extends State<TodayTasks> {
   @override
   Widget build(BuildContext context) {
     final tasks = Provider.of<TasksProvider>(context);
@@ -29,7 +29,7 @@ class _TodayTodosState extends State<TodayTodos> {
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             )),
         ...tasksOfToday.map<Widget>((Task todo) {
-          return TodoItem(task: todo);
+          return TaskItem(task: todo);
         }).toList(),
       ],
     );
