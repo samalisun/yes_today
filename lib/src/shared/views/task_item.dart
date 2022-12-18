@@ -35,7 +35,7 @@ class TaskItem extends StatelessWidget {
                 TaskItemLeading(task: task),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 11, 8, 16),
+                    padding: const EdgeInsets.fromLTRB(0, 11, 16, 16),
                     child: Text(
                       task.title,
                       style: const TextStyle(height: 1.5, fontSize: 16),

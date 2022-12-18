@@ -9,9 +9,11 @@ import '../../../shared/views/views.dart';
 class HomeDay extends StatelessWidget {
   HomeDay({
     required this.date,
+    required this.isLast,
   }) : super(key: ObjectKey(date));
 
   final DateTime date;
+  final bool isLast;
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +22,21 @@ class HomeDay extends StatelessWidget {
 
     final tasksCount = tasksOfTheDay.length;
     final trailing =
-        '${tasksCount.toString()} ${tasksCount > 0 ? ' tasks' : ' tasks'}';
+        '${tasksCount.toString()} ${tasksCount > 1 ? ' tasks' : ' task'}';
 
     final DateFormat formatter = DateFormat('E MMM dd, yyyy');
     final title = formatter.format(date);
+
+    final double bottomSpacing = isLast ? 96 : 48;
 
     return SliverList(
       delegate: SliverChildListDelegate([
         Container(
           margin: const EdgeInsets.only(bottom: 24),
           decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.outline)),
+            border: Border(
+                bottom:
+                    BorderSide(color: Theme.of(context).colorScheme.outline)),
           ),
           child: ListTile(
             contentPadding: const EdgeInsets.fromLTRB(24, 0, 24, 8),
@@ -46,7 +52,7 @@ class HomeDay extends StatelessWidget {
         ...tasksOfTheDay.map<Widget>((Task todo) {
           return TaskItem(task: todo);
         }).toList(),
-        const Padding(padding: EdgeInsets.only(bottom: 24)),
+        Padding(padding: EdgeInsets.only(bottom: bottomSpacing)),
       ]),
     );
   }

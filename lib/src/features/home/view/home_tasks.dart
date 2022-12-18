@@ -21,7 +21,10 @@ class _HomeTasksState extends State<HomeTasks> {
     return CustomScrollView(
       slivers: [
         ...datesWithTasks.map<Widget>((DateTime day) {
-          return HomeDay(date: day);
+          return HomeDay(
+            date: day,
+            isLast: datesWithTasks.indexOf(day) == datesWithTasks.length - 1,
+          );
         }),
       ],
     );
