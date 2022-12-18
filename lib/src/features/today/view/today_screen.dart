@@ -15,6 +15,7 @@ class _TodayScreenState extends State<TodayScreen> {
   int currentPageIndex = 0;
   final TextEditingController _textFieldController = TextEditingController();
   String newTaskTitle = '';
+  bool newTaskCompleted = false;
 
   @override
   void initState() {
@@ -24,7 +25,7 @@ class _TodayScreenState extends State<TodayScreen> {
     });
   }
 
-  void _submit() {
+  void _addTask() {
     Provider.of<TasksProvider>(context, listen: false).addTask(newTaskTitle);
     Navigator.pop(context, 'Add');
     _textFieldController.clear();
@@ -36,32 +37,33 @@ class _TodayScreenState extends State<TodayScreen> {
     super.dispose();
   }
 
-  Future<void> _displayDialog(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Add a new todo item'),
-          content: TextField(
-            autofocus: true,
-            controller: _textFieldController,
-            decoration: const InputDecoration(hintText: "Add New Task"),
-            onSubmitted: (_) => _submit(),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'Cancel'),
-              child: const Text('Cancel'),
+  Future<void> _openModal(BuildContext context) async {
+    return showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        ),
+        isScrollControlled: true,
+        builder: (context) {
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: SizedBox(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
+                child: TextField(
+                  autofocus: true,
+                  controller: _textFieldController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Task name',
+                    suffixIcon: Icon(Icons.arrow_forward),
+                  ),
+                  onSubmitted: (_) => _addTask(),
+                ),
+              ),
             ),
-            TextButton(
-              onPressed: _submit,
-              child: const Text('Submit'),
-            ),
-          ],
-        );
-      },
-    );
+          );
+        });
   }
 
   @override
@@ -108,7 +110,7 @@ class _TodayScreenState extends State<TodayScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () => _displayDialog(context),
+          onPressed: () => _openModal(context),
           tooltip: 'Add Item',
           child: const Icon(Icons.edit)),
     );
