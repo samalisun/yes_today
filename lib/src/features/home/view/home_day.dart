@@ -28,16 +28,12 @@ class HomeDay extends StatelessWidget {
     return SliverList(
       delegate: SliverChildListDelegate([
         Container(
-          margin: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+          margin: const EdgeInsets.only(bottom: 24),
           decoration: BoxDecoration(
-            border: Border(
-                bottom:
-                    BorderSide(color: Theme.of(context).colorScheme.outline)),
+            border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.outline)),
           ),
           child: ListTile(
-            contentPadding: const EdgeInsets.fromLTRB(0, 8, 16, 8),
-            minLeadingWidth: 32,
-            horizontalTitleGap: 8,
+            contentPadding: const EdgeInsets.fromLTRB(24, 0, 24, 8),
             title: Text(
               title,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
@@ -50,6 +46,7 @@ class HomeDay extends StatelessWidget {
         ...tasksOfTheDay.map<Widget>((Task todo) {
           return TaskItem(task: todo);
         }).toList(),
+        const Padding(padding: EdgeInsets.only(bottom: 24)),
       ]),
     );
   }
