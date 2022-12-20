@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'providers/providers.dart';
 import '../features/home/home.dart';
 import '../features/today/today.dart';
+import '../features/review/review.dart';
 
 class TodayScreen extends StatefulWidget {
   const TodayScreen({super.key});
@@ -174,10 +175,7 @@ class _TodayScreenState extends State<TodayScreen> {
       body: <Widget>[
         const HomeTasks(),
         const TodayTasks(),
-        Container(
-          alignment: Alignment.center,
-          child: const Text('Review'),
-        ),
+        const ReviewScreen(),
       ][currentPageIndex],
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {

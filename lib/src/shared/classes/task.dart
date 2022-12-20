@@ -8,6 +8,8 @@ class Task {
     this.completed = false,
     this.important = false,
     this.isBlocker = false,
+    this.people = 'me',
+    this.type = 'todo',
   });
 
   String title;
@@ -18,6 +20,8 @@ class Task {
   bool completed;
   bool important;
   bool isBlocker;
+  String people;
+  String type;
 
   void toggleCompleted() {
     completed = !completed;

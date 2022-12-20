@@ -21,6 +21,7 @@ class _TodayTasksState extends State<TodayTasks> {
     final DateFormat formatter = DateFormat('E MMM dd, yyyy');
 
     return ListView(
+      padding: EdgeInsets.zero,
       children: [
         Padding(
             padding: const EdgeInsets.all(24),
@@ -29,7 +30,7 @@ class _TodayTasksState extends State<TodayTasks> {
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             )),
         ...tasksOfToday.map<Widget>((Task todo) {
-          return TaskItem(task: todo);
+          return TaskItem(task: todo, borderForToday: true);
         }).toList(),
       ],
     );

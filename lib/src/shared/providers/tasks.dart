@@ -21,6 +21,7 @@ class TasksProvider with ChangeNotifier {
       id: DateTime.now().microsecondsSinceEpoch,
       dueDate: DateTime.parse('2022-12-16'),
       completed: true,
+      people: 'Cany',
     ),
     Task(
       title: 'add test cases for the search logic',
@@ -49,6 +50,25 @@ class TasksProvider with ChangeNotifier {
       createdTime: DateTime.now(),
       id: DateTime.now().microsecondsSinceEpoch,
       dueDate: DateTime.now(),
+    ),
+    Task(
+      title: 'Progress update',
+      createdTime: DateTime.now(),
+      id: DateTime.now().microsecondsSinceEpoch,
+      dueDate: DateUtils.addDaysToDate(DateTime.now(), 1),
+      type: 'meeting',
+    ),
+    Task(
+      title: 'Write test case',
+      createdTime: DateTime.now(),
+      id: DateTime.now().microsecondsSinceEpoch,
+      dueDate: DateUtils.addDaysToDate(DateTime.now(), 1),
+    ),
+    Task(
+      title: 'Integrate logic',
+      createdTime: DateTime.now(),
+      id: DateTime.now().microsecondsSinceEpoch,
+      dueDate: DateUtils.addDaysToDate(DateTime.now(), 2),
     ),
   ];
 
@@ -112,4 +132,7 @@ class TasksProvider with ChangeNotifier {
   List<Task> get tasksOfToday => _tasks
       .where((task) => DateUtils.isSameDay(task.dueDate, DateTime.now()))
       .toList();
+
+  List<Task> get blockers =>
+      _tasks.where((task) => task.type == 'blocker').toList();
 }

@@ -50,7 +50,7 @@ class HomeDay extends StatelessWidget {
           ),
         ),
         ...tasksOfTheDay.map<Widget>((Task todo) {
-          return TaskItem(task: todo);
+          return TaskItem(task: todo, borderForToday: true);
         }).toList(),
         Padding(padding: EdgeInsets.only(bottom: bottomSpacing)),
       ]),

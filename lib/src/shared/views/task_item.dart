@@ -6,22 +6,24 @@ import '../classes/classes.dart';
 class TaskItem extends StatelessWidget {
   TaskItem({
     required this.task,
+    this.borderForToday = false,
   }) : super(key: ObjectKey(task));
 
   final Task task;
+  final bool borderForToday;
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final bool isToday = DateUtils.isSameDay(task.dueDate, DateTime.now());
-    final double marginBottom = isToday ? 16 : 0;
-    final double marginLR = isToday ? 24 : 8;
+    final double marginBottom = borderForToday && isToday ? 16 : 0;
+    final double marginLR = borderForToday && isToday ? 24 : 8;
 
     return Container(
         margin: EdgeInsets.fromLTRB(marginLR, 0, marginLR, marginBottom),
         decoration: BoxDecoration(
           border: Border.all(
-              color: !isToday || task.completed
+              color: !borderForToday || !isToday || task.completed
                   ? colors.background
                   : colors.outline),
           borderRadius: const BorderRadius.all(Radius.circular(12)),
