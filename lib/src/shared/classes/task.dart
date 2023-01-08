@@ -26,4 +26,8 @@ class Task {
   void toggleCompleted() {
     completed = !completed;
   }
+
+  void togglePriority() {
+    important = !important;
+  }
 }

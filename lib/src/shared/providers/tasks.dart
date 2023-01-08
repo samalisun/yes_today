@@ -74,12 +74,14 @@ class TasksProvider with ChangeNotifier {
 
   UnmodifiableListView<Task> get tasks => UnmodifiableListView(_tasks);
 
-  void addTask(String title) {
+  void addTask(String title, DateTime date, bool isBlocker, bool isImportant) {
     _tasks.add(Task(
       title: title,
       id: DateTime.now().microsecondsSinceEpoch,
       createdTime: DateTime.now(),
-      dueDate: DateTime.now(),
+      dueDate: date,
+      isBlocker: isBlocker,
+      important: isImportant,
     ));
     notifyListeners();
   }
@@ -87,6 +89,12 @@ class TasksProvider with ChangeNotifier {
   void toggleTaskStatus(Task task) {
     final taskIndex = _tasks.indexOf(task);
     _tasks[taskIndex].toggleCompleted();
+    notifyListeners();
+  }
+
+  void toggleTaskPriority(Task task) {
+    final taskIndex = _tasks.indexOf(task);
+    _tasks[taskIndex].togglePriority();
     notifyListeners();
   }
 
@@ -134,5 +142,5 @@ class TasksProvider with ChangeNotifier {
       .toList();
 
   List<Task> get blockers =>
-      _tasks.where((task) => task.type == 'blocker').toList();
+      _tasks.where((task) => task.isBlocker == true).toList();
 }

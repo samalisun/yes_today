@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yes_today/src/shared/views/create_panel.dart';
 
 import 'providers/providers.dart';
 import '../features/home/home.dart';
@@ -36,8 +37,9 @@ class _TodayScreenState extends State<TodayScreen> {
     });
   }
 
-  void _addTask() {
-    Provider.of<TasksProvider>(context, listen: false).addTask(newTaskTitle);
+  void _addTask(String title, DateTime date, bool isBlocker,  bool isImportant) {
+    Provider.of<TasksProvider>(context, listen: false)
+        .addTask(title, date, isBlocker, isImportant);
     Navigator.pop(context, 'Add');
     _textFieldController.clear();
   }
@@ -49,30 +51,19 @@ class _TodayScreenState extends State<TodayScreen> {
   }
 
   Future<void> _openModal(BuildContext context) async {
+    final colors = Theme.of(context).colorScheme;
+
     return showModalBottomSheet(
         context: context,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
         ),
         isScrollControlled: true,
+        backgroundColor: colors.surface,
         builder: (context) {
           return Padding(
             padding: MediaQuery.of(context).viewInsets,
-            child: SizedBox(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
-                child: TextField(
-                  autofocus: true,
-                  controller: _textFieldController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Task name',
-                    suffixIcon: Icon(Icons.arrow_forward),
-                  ),
-                  onSubmitted: (_) => _addTask(),
-                ),
-              ),
-            ),
+            child: CreatePanel(addTask: _addTask),
           );
         });
   }
@@ -130,9 +121,11 @@ class _TodayScreenState extends State<TodayScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: const <Widget>[
-                                  Text('Kristen', style: TextStyle(fontSize: 16)),
+                                  Text('Kristen',
+                                      style: TextStyle(fontSize: 16)),
                                   Padding(padding: EdgeInsets.only(bottom: 4)),
-                                  Text('Developer', style: TextStyle(fontSize: 12)),
+                                  Text('Developer',
+                                      style: TextStyle(fontSize: 12)),
                                 ],
                               ),
                             ),
