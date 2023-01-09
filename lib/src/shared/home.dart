@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yes_today/src/shared/views/create_panel.dart';
 
-import 'providers/providers.dart';
 import '../features/home/home.dart';
-import '../features/today/today.dart';
 import '../features/review/review.dart';
+import '../features/today/today.dart';
+import 'providers/providers.dart';
 
 class TodayScreen extends StatefulWidget {
   const TodayScreen({super.key});
@@ -63,7 +63,7 @@ class _TodayScreenState extends State<TodayScreen> {
         builder: (context) {
           return Padding(
             padding: MediaQuery.of(context).viewInsets,
-            child: CreatePanel(addTask: _addTask),
+            child: CreatePanel(onSubmit: _addTask),
           );
         });
   }
